@@ -18,11 +18,12 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests()
-				.antMatchers("/home").permitAll()
 				.anyRequest().authenticated()
-				.and()
-			.httpBasic();
-				
+			.and()
+			.formLogin(form -> form
+				.loginPage("/login")
+				.permitAll()
+			);
 	}
 	
 	@Bean
